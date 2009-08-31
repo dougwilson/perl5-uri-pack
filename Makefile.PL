@@ -5,7 +5,9 @@ all_from 'lib/URI/pack.pm';
 author   'Douglas Christopher Wilson <doug@somethingdoug.com>';
 license  'perl';
 
-requires 'namespace::clean' => '0.04';
+# Modules that are required
+requires 'URI'  => 0;
+requires 'base' => 0;
 
 test_requires 'Test::More' => 0;
 

@@ -6,18 +6,17 @@ use warnings 'all';
 
 ##############################################################################
 # TEST MODULES
-use Test::More;;
+use Test::More;
+
+##############################################################################
+# MODULES
+use URI;
 
 ##############################################################################
 # TEST PLAN
 plan tests => 1;
 
-##############################################################################
-# USE TESTS
-use_ok 'URI::pack';
-
-##############################################################################
-# PRINT BASIC MESSAGE
-diag(sprintf 'Testing URI::pack %s, Perl %s, %s', $URI::pack::VERSION, $], $^X);
+isa_ok(URI->new('pack://http:,,www.mysite.com,my.package/a/b/foo.xml'),
+	'URI::pack');
 
 exit 0;

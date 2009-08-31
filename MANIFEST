@@ -17,6 +17,7 @@ MANIFEST.SKIP
 META.yml
 README
 t/00-load.t
+t/parsing.t
 xt/clean-namespaces.t
 xt/consistent-version.t
 xt/critic.t

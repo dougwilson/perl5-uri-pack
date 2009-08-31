@@ -10,8 +10,12 @@ our $AUTHORITY = 'cpan:DOUGDUDE';
 our $VERSION   = '0.001';
 
 ###############################################################################
-# ALL IMPORTS BEFORE THIS WILL BE ERASED
-use namespace::clean 0.04 -except => [qw(meta)];
+# INHERIT FROM PARENT CLASS
+use base qw(URI::_generic);
+
+###############################################################################
+# PRIVATE METHODS
+sub _no_scheme_ok { return 0; }
 
 1;
 
@@ -27,10 +31,18 @@ This documnetation refers to L<URI::pack> version 0.001
 
 =head1 SYNOPSIS
 
-Currently the main module, L<URI::pack> has not been completed and there is
-no documentation.
+  use URI;
+
+  # New absolute pack URI
+  my $pack_uri = URI->new('pack://application,,,/ResourceFile.xaml');
+
+  # New relative pack URI
+  my $rel_pack_uri = URI->new('/images/logo.png', 'pack');
 
 =head1 DESCRIPTION
+
+Currently the main module, L<URI::pack> has not been completed and there is
+no documentation.
 
 =head1 METHODS
 
