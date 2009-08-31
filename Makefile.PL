@@ -6,8 +6,9 @@ author   'Douglas Christopher Wilson <doug@somethingdoug.com>';
 license  'perl';
 
 # Modules that are required
-requires 'URI'  => 0;
-requires 'base' => 0;
+requires 'URI'              => 0;
+requires 'base'             => 0;
+requires 'namespace::clean' => 0;
 
 test_requires 'Test::More' => 0;
 

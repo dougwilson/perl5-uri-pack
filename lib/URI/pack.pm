@@ -10,8 +10,55 @@ our $AUTHORITY = 'cpan:DOUGDUDE';
 our $VERSION   = '0.001';
 
 ###############################################################################
+# MODULES
+use URI;
+use URI::Escape qw(uri_escape uri_unescape);
+
+###############################################################################
 # INHERIT FROM PARENT CLASS
 use base qw(URI::_generic);
+
+###############################################################################
+# ALL IMPORTS BEFORE THIS WILL BE ERASED
+use namespace::clean;
+
+###############################################################################
+# METHODS
+sub package_uri {
+	my ($self, $new_package) = @_;
+
+	# Get the package according to ECMA-376, Part 2, section B.2
+	# Call the normal authority and get the result
+	my $authority = $self->authority;
+
+	# Replace all commas with forward slashes
+	$authority =~ s{,}{/}gmsx;
+
+	# Unescape the authority
+	$authority = uri_unescape($authority);
+
+	if (defined $new_package) {
+		# Set a new authority according to ECMA-376, Part 2, section B.3
+		# Make sure the new package is a URI
+		$new_package = URI->new($new_package);
+
+		# Remove the fragment
+		$new_package->fragment(q{});
+
+		# Escape all %, ?, @, :, and , characters
+		## no critic (ValuesAndExpressions::RequireInterpolationOfMetachars)
+		$new_package = uri_escape($new_package, '%?@:,');
+
+		# Replace all forward slashes with commas
+		$new_package =~ s{/}{,}gmsx;
+
+		# Set the resulting string as the authority
+		$self->authority($new_package);
+	}
+
+	# Return the authority as an URI object
+	return URI->new($authority);
+}
 
 ###############################################################################
 # PRIVATE METHODS
@@ -44,13 +91,34 @@ This documnetation refers to L<URI::pack> version 0.001
 Currently the main module, L<URI::pack> has not been completed and there is
 no documentation.
 
+=head1 ATTRIBUTES
+
+This object provides multiple attributes. Calling the attribute as a method
+with no arguments will return the value of the attribute. Calling the attribute
+with one argument will set the value of the attribute to be that value and
+returns the old value.
+
+  # Get the value of an attribute
+  my $package = $uri->package_uri;
+
+  # Set the value of an attribute
+  my $old_package = $uri->package_uri($package);
+
+=head2 package_uri
+
+This is the L<URI> of the package.
+
 =head1 METHODS
 
 =head1 DEPENDENCIES
 
 =over
 
-=item * L<namespace::clean> 0.04
+=item * L<URI>
+
+=item * L<URI::Escape>
+
+=item * L<namespace::clean>
 
 =back
 
