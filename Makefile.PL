@@ -17,7 +17,8 @@ requires
 
 # Modules that are required for tests
 test_requires
-	'Test::More' => 0;
+	'Test::More' => 0,
+	'Test::Most' => 0;
 
 # Modules that are required for author tests
 author_requires
