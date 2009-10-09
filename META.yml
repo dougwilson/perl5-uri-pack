@@ -26,7 +26,7 @@ requires:
   namespace::clean: 0
   perl: 5.8.1
 resources:
-  homepage: http://github.com/dougwilson/perl5-pack-uri/
+  homepage: http://github.com/dougwilson/perl5-uri-pack/
   license: http://dev.perl.org/licenses/
-  repository: git://github.com/dougwilson/perl5-pack-uri.git
+  repository: git://github.com/dougwilson/perl5-uri-pack.git
 version: 0.001

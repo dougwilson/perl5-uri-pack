@@ -6,8 +6,8 @@ author   'Douglas Christopher Wilson <doug@somethingdoug.com>';
 license  'perl';
 
 # Resources
-resources homepage   => 'http://github.com/dougwilson/perl5-pack-uri/';
-resources repository => 'git://github.com/dougwilson/perl5-pack-uri.git';
+resources homepage   => 'http://github.com/dougwilson/perl5-uri-pack/';
+resources repository => 'git://github.com/dougwilson/perl5-uri-pack.git';
 
 # Modules that are required
 requires
