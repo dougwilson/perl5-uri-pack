@@ -105,7 +105,13 @@ sub part_name {
 
 	if (defined $new_part_name) {
 		# Set the new part name
-		$self->path($new_part_name);
+		if ($self->_is_valid_part_uri($new_part_name)) {
+			# Set the new part name since it is valid
+			$self->path($new_part_name);
+		}
+		else {
+			croak 'The part name given was not a valid part name was thus was not set';
+		}
 	}
 
 	if (!$self->has_part_name) {
