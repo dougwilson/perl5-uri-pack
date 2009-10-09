@@ -54,7 +54,7 @@ sub has_package_uri {
 	my ($self) = @_;
 
 	# Does this URI have a package?
-	return $self->authority ne q{};
+	return defined $self->authority && $self->authority ne q{};
 }
 sub has_part_name {
 	my ($self) = @_;
