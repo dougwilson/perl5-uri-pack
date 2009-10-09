@@ -312,6 +312,15 @@ This will return a Boolean of the presence of a L</part_name> in the pack URI.
 
 =back
 
+=head1 SEE ALSO
+
+=over
+
+=item * L<URI> the the base class, so you may want to look at the methods that
+are provided.
+
+=back
+
 =head1 AUTHOR
 
 Douglas Christopher Wilson, C<< <doug at somethingdoug.com> >>
