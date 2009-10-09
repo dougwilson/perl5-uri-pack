@@ -11,6 +11,9 @@ our $VERSION   = '0.001';
 
 ###############################################################################
 # MODULES
+use Carp qw(croak);
+use List::MoreUtils qw(any);
+use Readonly 1.03;
 use URI;
 use URI::Escape qw(uri_escape uri_unescape);
 
@@ -19,11 +22,46 @@ use URI::Escape qw(uri_escape uri_unescape);
 use base qw(URI::_generic);
 
 ###############################################################################
+# CONSTANTS
+Readonly my $UNRESERVED  => qr{[0-9A-Za-z\-\._~]}msx;
+Readonly my $PCT_ENCODED => qr{\%[0-9A-Fa-f]{2}}msx;
+Readonly my $SUB_DELIMS  => qr{[!\$\&'\(\)\*\+,;=]}msx;
+Readonly my $PCHAR       => qr{(?:$UNRESERVED|$PCT_ENCODED|$SUB_DELIMS|[:\@])}msx;
+
+###############################################################################
 # ALL IMPORTS BEFORE THIS WILL BE ERASED
 use namespace::clean;
 
 ###############################################################################
 # METHODS
+sub clear_package_uri {
+	my ($self) = @_;
+
+	# This will remove the package by changing the authority to q{}
+	$self->authority(q{});
+
+	return;
+}
+sub clear_part_name {
+	my ($self) = @_;
+
+	# This will remove the part name by changing the path to /
+	$self->path(q{/});
+
+	return;
+}
+sub has_package_uri {
+	my ($self) = @_;
+
+	# Does this URI have a package?
+	return $self->authority ne q{};
+}
+sub has_part_name {
+	my ($self) = @_;
+
+	# Does this URI have a part name?
+	return $self->path ne q{} && $self->path ne q{/};
+}
 sub package_uri {
 	my ($self, $new_package) = @_;
 
@@ -59,9 +97,129 @@ sub package_uri {
 	# Return the authority as an URI object
 	return URI->new($authority);
 }
+sub part_name {
+	my ($self, $new_part_name) = @_;
+
+	# The part name is simply the path
+	my $part_name = $self->path;
+
+	if (defined $new_part_name) {
+		# Set the new part name
+		$self->path($new_part_name);
+	}
+
+	if (!$self->has_part_name) {
+		return;
+	}
+
+	return $part_name;
+}
+sub part_name_segments {
+	my ($self, @new_part_name_segments) = @_;
+
+	# Get the path segments
+	my @path_segments = $self->path_segments;
+
+	# Remove the first path segment, as it is q{}
+	if (@path_segments && $path_segments[0] eq q{}) {
+		shift @path_segments;
+	}
+
+	if (@new_part_name_segments) {
+		# Set the new part name
+		$self->part_name(q{/} . join q{/}, @new_part_name_segments);
+	}
+
+	return @path_segments;
+}
 
 ###############################################################################
 # PRIVATE METHODS
+sub _check_uri {
+	my ($self) = @_;
+
+	# If the URI has a part name, check it
+	if ($self->has_part_name) {
+		# Check the part
+		$self->_is_valid_part_uri($self->path);
+	}
+
+	# Must have either package or part name
+	if (!$self->has_package_uri && !$self->has_part_name) {
+		croak 'Not a valid URI';
+	}
+
+	return $self;
+}
+sub _init {
+	my ($class, $uri, $scheme) = @_;
+
+	# Create and bless into class using default _init
+	my $self = $class->SUPER::_init($uri, $scheme);
+
+	# Check the URI
+	$self->_check_uri();
+
+	return $self;
+}
+sub _is_valid_part_uri {
+	my ($self, $part_uri) = @_;
+
+	# Validate a part URI according to ECMA-376 Part 2, section 9.1.1.1.2
+
+	if ($part_uri eq q{}) {
+		croak 'A part URI shall not be empty [M1.1]';
+	}
+
+	if ($part_uri !~ m{\A /}msx) {
+		croak 'A part URI shall start with a forward slash ("/") character [M1.4]';
+	}
+
+	if ($part_uri =~ m{/ \z}msx) {
+		croak 'A part URI shall not have a forward slash as the last character [M1.5]';
+	}
+
+	# Split the part URI into segments
+	my @segments = split m{/}msx, $part_uri;
+
+	# Remove the first empty segment
+	if ($segments[0] eq q{}) {
+		shift @segments;
+	}
+
+	foreach my $segment (@segments) {
+		if ($segment eq q{}) {
+			croak 'A part URI shall not have empty segments [M1.3]';
+		}
+
+		if ($segment !~ m{\A (?:$PCHAR)+ \z}msx) {
+			croak 'A segments shall not hold any characters other than pchar characters [M1.6]';
+		}
+
+		if ($segment =~ m{\%(?:2f|5c)}imsx) {
+			croak 'A segments shall not contain percent-encoded forward slash ("/"), or backward slash ("\") characters [M1.7]';
+		}
+
+		while ($segment =~ m{%([0-9a-f]{2})}gimsx) {
+			# Convert the byte into the original character
+			my $character = chr hex $1;
+
+			if ($character =~ m{\A [0-9A-Z\-\._~] \z}imsx) {
+				croak 'A segment shall not contain percent-encoded unreserved characters [M1.8]';
+			}
+		}
+
+		if ($segment =~ m{\. \z}msx) {
+			croak 'A segment shall not end with a dot (".") character [M1.9]';
+		}
+
+		if ($segment !~ m{[^\.]+}msx) {
+			croak 'A segment shall include at least one non-dot character [M1.10]';
+		}
+	}
+
+	return 1;
+}
 sub _no_scheme_ok { return 0; }
 
 1;
@@ -108,7 +266,33 @@ returns the old value.
 
 This is the L<URI> of the package.
 
+=head2 part_name
+
+This is the part name in the pack URI. If there is no part name, then undef is
+returned.
+
+=head2 part_name_segments
+
+This is an array of the segments in the part name. A part name of
+C</hello/world/doc.xml> has three segments: C<hello>, C<world>, C<doc.xml>.
+
 =head1 METHODS
+
+=head2 clear_package_uri
+
+This will clear the L</package_uri> attribute.
+
+=head2 clear_part_name
+
+This will clear the L</part_name> attribute.
+
+=head2 has_package_uri
+
+This will return a Boolean of the presence of a L</package_uri> in the pack URI.
+
+=head2 has_part_name
+
+This will return a Boolean of the presence of a L</part_name> in the pack URI.
 
 =head1 DEPENDENCIES
 
