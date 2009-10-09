@@ -1,5 +1,4 @@
 Changes
-docs/draft-shur-pack-uri-scheme-05.txt
 inc/Module/Install.pm
 inc/Module/Install/AuthorRequires.pm
 inc/Module/Install/AuthorTests.pm
