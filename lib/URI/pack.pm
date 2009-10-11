@@ -12,7 +12,6 @@ our $VERSION   = '0.001';
 ###############################################################################
 # MODULES
 use Carp qw(croak);
-use List::MoreUtils qw(any);
 use Readonly 1.03;
 use URI;
 use URI::Escape qw(uri_escape uri_unescape);
@@ -303,6 +302,8 @@ This will return a Boolean of the presence of a L</part_name> in the pack URI.
 =head1 DEPENDENCIES
 
 =over
+
+=item * L<Carp>
 
 =item * L<URI>
 

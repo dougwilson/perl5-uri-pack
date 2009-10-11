@@ -11,7 +11,9 @@ resources repository => 'git://github.com/dougwilson/perl5-uri-pack.git';
 
 # Modules that are required
 requires
+	'Carp'             => 0,
 	'URI'              => 0,
+	'Readonly'         => '1.03',
 	'base'             => 0,
 	'namespace::clean' => 0;
 
