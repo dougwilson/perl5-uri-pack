@@ -31,4 +31,4 @@ resources:
   homepage: http://github.com/dougwilson/perl5-uri-pack/
   license: http://dev.perl.org/licenses/
   repository: git://github.com/dougwilson/perl5-uri-pack.git
-version: 0.001
+version: 0.002
