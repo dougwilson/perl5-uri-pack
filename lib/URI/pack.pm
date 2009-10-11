@@ -7,12 +7,11 @@ use warnings 'all';
 ###############################################################################
 # METADATA
 our $AUTHORITY = 'cpan:DOUGDUDE';
-our $VERSION   = '0.001';
+our $VERSION   = '0.002';
 
 ###############################################################################
 # MODULES
 use Carp qw(croak);
-use List::MoreUtils qw(any);
 use Readonly 1.03;
 use URI;
 use URI::Escape qw(uri_escape uri_unescape);
@@ -238,7 +237,7 @@ URI::pack - Support of the pack scheme in URI.
 
 =head1 VERSION
 
-This documnetation refers to L<URI::pack> version 0.001
+This documnetation refers to L<URI::pack> version 0.002
 
 =head1 SYNOPSIS
 
@@ -303,6 +302,8 @@ This will return a Boolean of the presence of a L</part_name> in the pack URI.
 =head1 DEPENDENCIES
 
 =over
+
+=item * L<Carp>
 
 =item * L<URI>
 

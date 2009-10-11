@@ -21,12 +21,14 @@ no_index:
     - t
     - xt
 requires:
+  Carp: 0
+  Readonly: 1.03
   URI: 0
   base: 0
   namespace::clean: 0
   perl: 5.8.1
 resources:
-  homepage: http://github.com/dougwilson/perl5-pack-uri/
+  homepage: http://github.com/dougwilson/perl5-uri-pack/
   license: http://dev.perl.org/licenses/
-  repository: git://github.com/dougwilson/perl5-pack-uri.git
-version: 0.001
+  repository: git://github.com/dougwilson/perl5-uri-pack.git
+version: 0.002

@@ -1,5 +1,10 @@
 Revision history for URI-pack
 =============================
 
+0.002 Sat, October 10, 2009 23:52:13 -0500
+  * NO REAL CHANGES
+  * Added Readonly 1.03 as a dependency as it was missing
+    from the list.
+
 0.001 Thu, October 8, 2009 23:35:12 -0500
   * First release.
