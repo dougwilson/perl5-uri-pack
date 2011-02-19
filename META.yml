@@ -25,7 +25,7 @@ provides:
     version: 0.002
 requires:
   Carp: 0
-  Readonly: 1.03
+  Const::Fast: 0
   URI: 0
   base: 0
   namespace::clean: 0

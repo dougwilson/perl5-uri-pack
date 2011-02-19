@@ -12,7 +12,7 @@ our $VERSION   = '0.002';
 ###############################################################################
 # MODULES
 use Carp qw(croak);
-use Readonly 1.03;
+use Const::Fast qw(const);
 use URI;
 use URI::Escape qw(uri_escape uri_unescape);
 
@@ -22,10 +22,10 @@ use base qw(URI::_generic);
 
 ###############################################################################
 # CONSTANTS
-Readonly my $UNRESERVED  => qr{[0-9A-Za-z\-\._~]}msx;
-Readonly my $PCT_ENCODED => qr{\%[0-9A-Fa-f]{2}}msx;
-Readonly my $SUB_DELIMS  => qr{[!\$\&'\(\)\*\+,;=]}msx;
-Readonly my $PCHAR       => qr{(?:$UNRESERVED|$PCT_ENCODED|$SUB_DELIMS|[:\@])}msx;
+const my $UNRESERVED  => qr{[0-9A-Za-z\-\._~]}msx;
+const my $PCT_ENCODED => qr{\%[0-9A-Fa-f]{2}}msx;
+const my $SUB_DELIMS  => qr{[!\$\&'\(\)\*\+,;=]}msx;
+const my $PCHAR       => qr{(?:$UNRESERVED|$PCT_ENCODED|$SUB_DELIMS|[:\@])}msx;
 
 ###############################################################################
 # ALL IMPORTS BEFORE THIS WILL BE ERASED
@@ -304,6 +304,8 @@ This will return a Boolean of the presence of a L</part_name> in the pack URI.
 =over
 
 =item * L<Carp>
+
+=item * L<Const::Fast>
 
 =item * L<URI>
 
