@@ -364,7 +364,7 @@ L<http://search.cpan.org/dist/URI-pack/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2009 Douglas Christopher Wilson.
+Copyright 2011 Douglas Christopher Wilson.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of either:
