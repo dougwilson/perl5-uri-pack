@@ -1,6 +1,7 @@
 \A.git/
 \A_build/
 \Ablib/
+\ABuild\z
 \A.gitignore\z
 \AMakefile(?:\.old|)?\z
 \AMANIFEST\.(?:bak|SKIP)\z
