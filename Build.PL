@@ -36,8 +36,8 @@ my $build = Module::Build->new(
 		'Carp'             => 0,
 		'Const::Fast'      => 0,
 		'URI'              => 0,
-		'base'             => 0,
 		'namespace::clean' => 0,
+		'parent'           => 0,
 	},
 
 	# Enable tests to be in multi-level directories

@@ -18,7 +18,7 @@ use URI::Escape qw(uri_escape uri_unescape);
 
 ###############################################################################
 # INHERIT FROM PARENT CLASS
-use base qw(URI::_generic);
+use parent qw(URI::_generic);
 
 ###############################################################################
 # CONSTANTS
@@ -312,6 +312,8 @@ This will return a Boolean of the presence of a L</part_name> in the pack URI.
 =item * L<URI::Escape>
 
 =item * L<namespace::clean>
+
+=item * L<parent>
 
 =back
 

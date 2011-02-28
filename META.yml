@@ -27,8 +27,8 @@ requires:
   Carp: 0
   Const::Fast: 0
   URI: 0
-  base: 0
   namespace::clean: 0
+  parent: 0
   perl: 5.008003
 resources:
   homepage: http://github.com/dougwilson/perl5-uri-pack/
