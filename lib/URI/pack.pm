@@ -156,7 +156,7 @@ sub _check_uri {
 
 	return $self;
 }
-sub _init {
+sub _init { ## no critic (Subroutines::ProhibitUnusedPrivateSubroutines)
 	my ($class, $uri, $scheme) = @_;
 
 	# Create and bless into class using default _init
@@ -225,7 +225,7 @@ sub _is_valid_part_uri {
 
 	return 1;
 }
-sub _no_scheme_ok { return 0; }
+sub _no_scheme_ok { return 0; } ## no critic (Subroutines::ProhibitUnusedPrivateSubroutines)
 
 1;
 
@@ -237,7 +237,7 @@ URI::pack - Support of the pack scheme in URI.
 
 =head1 VERSION
 
-This documnetation refers to L<URI::pack> version 0.002
+This documentation refers to version 0.002
 
 =head1 SYNOPSIS
 
@@ -251,8 +251,7 @@ This documnetation refers to L<URI::pack> version 0.002
 
 =head1 DESCRIPTION
 
-Currently the main module, L<URI::pack> has not been completed and there is
-no documentation.
+Currently this has not been completed and there is little documentation.
 
 =head1 ATTRIBUTES
 
@@ -269,12 +268,12 @@ returns the old value.
 
 =head2 package_uri
 
-This is the L<URI> of the package.
+This is the L<URI|URI> of the package.
 
 =head2 part_name
 
-This is the part name in the pack URI. If there is no part name, then undef is
-returned.
+This is the part name in the pack URI. If there is no part name, then C<undef>
+is returned.
 
 =head2 part_name_segments
 
@@ -303,17 +302,17 @@ This will return a Boolean of the presence of a L</part_name> in the pack URI.
 
 =over
 
-=item * L<Carp>
+=item * L<Carp|Carp>
 
-=item * L<Const::Fast>
+=item * L<Const::Fast|Const::Fast>
 
-=item * L<URI>
+=item * L<URI|URI>
 
-=item * L<URI::Escape>
+=item * L<URI::Escape|URI::Escape>
 
-=item * L<namespace::clean>
+=item * L<namespace::clean|namespace::clean>
 
-=item * L<parent>
+=item * L<parent|parent>
 
 =back
 
@@ -321,7 +320,7 @@ This will return a Boolean of the presence of a L</part_name> in the pack URI.
 
 =over
 
-=item * L<URI> the the base class, so you may want to look at the methods that
+=item * L<URI|URI> the the base class, so you may want to look at the methods that
 are provided.
 
 =back
@@ -342,7 +341,7 @@ I highly encourage the submission of bugs and enhancements to my modules.
 
 =head1 SUPPORT
 
-You can find documentation for this module with the perldoc command.
+You can find documentation for this module with the C<perldoc> command.
 
   perldoc URI::pack
 
