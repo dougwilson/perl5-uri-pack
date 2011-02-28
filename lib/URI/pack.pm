@@ -352,10 +352,6 @@ You can also look for information at:
 
 L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=URI-pack>
 
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/URI-pack>
-
 =item * CPAN Ratings
 
 L<http://cpanratings.perl.org/d/URI-pack>
