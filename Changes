@@ -1,6 +1,6 @@
 Revision history for perl distribution URI-pack
 
-TO BE RELEASED
+0.002001 2011-10-18
  [OTHER]
  - Change from Module::Install to Module::Build.
  - Change from Readonly to Const::Fast.

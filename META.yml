@@ -7,8 +7,9 @@ build_requires:
   Test::Most: 0
   Test::Requires: 0.02
 configure_requires:
-  Module::Build: 0.36
-generated_by: 'Module::Build version 0.3607'
+  Module::Build: 0.38
+dynamic_config: 1
+generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.112150'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -22,7 +23,7 @@ no_index:
 provides:
   URI::pack:
     file: lib/URI/pack.pm
-    version: 0.002
+    version: 0.002001
 requires:
   Carp: 0
   Const::Fast: 0
@@ -34,4 +35,4 @@ resources:
   homepage: http://github.com/dougwilson/perl5-uri-pack/
   license: http://dev.perl.org/licenses/
   repository: git://github.com/dougwilson/perl5-uri-pack.git
-version: 0.002
+version: 0.002001
