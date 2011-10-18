@@ -1,5 +1,5 @@
-URI-pack version 0.002
-======================
+URI-pack version 0.002001
+=========================
 
 INSTALLATION
 ------------

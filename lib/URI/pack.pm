@@ -7,7 +7,7 @@ use warnings 'all';
 ###############################################################################
 # METADATA
 our $AUTHORITY = 'cpan:DOUGDUDE';
-our $VERSION   = '0.002';
+our $VERSION   = '0.002001';
 
 ###############################################################################
 # MODULES
@@ -237,7 +237,7 @@ URI::pack - Support of the pack scheme in URI.
 
 =head1 VERSION
 
-This documentation refers to version 0.002
+This documentation refers to version 0.002001.
 
 =head1 SYNOPSIS
 
