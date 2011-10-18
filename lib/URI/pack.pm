@@ -251,7 +251,9 @@ This documentation refers to version 0.002
 
 =head1 DESCRIPTION
 
-Currently this has not been completed and there is little documentation.
+This module will have pack URIs as given to the L<URI module|URI> blessed into
+this class instead of L<URI::_generic|URI::_generic>. This class provides extra
+pack-specific functionality.
 
 =head1 ATTRIBUTES
 
