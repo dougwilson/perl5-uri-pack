@@ -1,31 +1,31 @@
 package URI::pack;
 
-use 5.008001;
+use 5.008003;
 use strict;
 use warnings 'all';
 
 ###############################################################################
 # METADATA
 our $AUTHORITY = 'cpan:DOUGDUDE';
-our $VERSION   = '0.002';
+our $VERSION   = '0.002001';
 
 ###############################################################################
 # MODULES
 use Carp qw(croak);
-use Readonly 1.03;
+use Const::Fast qw(const);
 use URI;
 use URI::Escape qw(uri_escape uri_unescape);
 
 ###############################################################################
 # INHERIT FROM PARENT CLASS
-use base qw(URI::_generic);
+use parent qw(URI::_generic);
 
 ###############################################################################
 # CONSTANTS
-Readonly my $UNRESERVED  => qr{[0-9A-Za-z\-\._~]}msx;
-Readonly my $PCT_ENCODED => qr{\%[0-9A-Fa-f]{2}}msx;
-Readonly my $SUB_DELIMS  => qr{[!\$\&'\(\)\*\+,;=]}msx;
-Readonly my $PCHAR       => qr{(?:$UNRESERVED|$PCT_ENCODED|$SUB_DELIMS|[:\@])}msx;
+const my $UNRESERVED  => qr{[0-9A-Za-z\-\._~]}msx;
+const my $PCT_ENCODED => qr{\%[0-9A-Fa-f]{2}}msx;
+const my $SUB_DELIMS  => qr{[!\$\&'\(\)\*\+,;=]}msx;
+const my $PCHAR       => qr{(?:$UNRESERVED|$PCT_ENCODED|$SUB_DELIMS|[:\@])}msx;
 
 ###############################################################################
 # ALL IMPORTS BEFORE THIS WILL BE ERASED
@@ -156,7 +156,7 @@ sub _check_uri {
 
 	return $self;
 }
-sub _init {
+sub _init { ## no critic (Subroutines::ProhibitUnusedPrivateSubroutines)
 	my ($class, $uri, $scheme) = @_;
 
 	# Create and bless into class using default _init
@@ -225,7 +225,7 @@ sub _is_valid_part_uri {
 
 	return 1;
 }
-sub _no_scheme_ok { return 0; }
+sub _no_scheme_ok { return 0; } ## no critic (Subroutines::ProhibitUnusedPrivateSubroutines)
 
 1;
 
@@ -237,7 +237,7 @@ URI::pack - Support of the pack scheme in URI.
 
 =head1 VERSION
 
-This documnetation refers to L<URI::pack> version 0.002
+This documentation refers to version 0.002001.
 
 =head1 SYNOPSIS
 
@@ -251,8 +251,9 @@ This documnetation refers to L<URI::pack> version 0.002
 
 =head1 DESCRIPTION
 
-Currently the main module, L<URI::pack> has not been completed and there is
-no documentation.
+This module will have pack URIs as given to the L<URI module|URI> blessed into
+this class instead of L<URI::_generic|URI::_generic>. This class provides extra
+pack-specific functionality.
 
 =head1 ATTRIBUTES
 
@@ -269,12 +270,12 @@ returns the old value.
 
 =head2 package_uri
 
-This is the L<URI> of the package.
+This is the L<URI|URI> of the package.
 
 =head2 part_name
 
-This is the part name in the pack URI. If there is no part name, then undef is
-returned.
+This is the part name in the pack URI. If there is no part name, then C<undef>
+is returned.
 
 =head2 part_name_segments
 
@@ -303,13 +304,17 @@ This will return a Boolean of the presence of a L</part_name> in the pack URI.
 
 =over
 
-=item * L<Carp>
+=item * L<Carp|Carp>
 
-=item * L<URI>
+=item * L<Const::Fast|Const::Fast>
 
-=item * L<URI::Escape>
+=item * L<URI|URI>
 
-=item * L<namespace::clean>
+=item * L<URI::Escape|URI::Escape>
+
+=item * L<namespace::clean|namespace::clean>
+
+=item * L<parent|parent>
 
 =back
 
@@ -317,7 +322,7 @@ This will return a Boolean of the presence of a L</part_name> in the pack URI.
 
 =over
 
-=item * L<URI> the the base class, so you may want to look at the methods that
+=item * L<URI|URI> the the base class, so you may want to look at the methods that
 are provided.
 
 =back
@@ -338,7 +343,7 @@ I highly encourage the submission of bugs and enhancements to my modules.
 
 =head1 SUPPORT
 
-You can find documentation for this module with the perldoc command.
+You can find documentation for this module with the C<perldoc> command.
 
   perldoc URI::pack
 
@@ -349,10 +354,6 @@ You can also look for information at:
 =item * RT: CPAN's request tracker
 
 L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=URI-pack>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/URI-pack>
 
 =item * CPAN Ratings
 
@@ -366,7 +367,7 @@ L<http://search.cpan.org/dist/URI-pack/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2009 Douglas Christopher Wilson.
+Copyright 2011 Douglas Christopher Wilson.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of either:

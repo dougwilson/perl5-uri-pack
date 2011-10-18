@@ -1,15 +1,15 @@
-URI-pack version 0.002
-======================
+URI-pack version 0.002001
+=========================
 
 INSTALLATION
 ------------
 
 To install this module, run the following commands:
 
-    perl Makefile.PL
-    make
-    make test
-    make install
+    perl Build.PL
+    perl Build
+    perl Build test
+    perl Build install
 
 SUPPORT AND DOCUMENTATION
 -------------------------
@@ -23,8 +23,6 @@ You can also look for information at:
 
 *   [RT, CPAN's request tracker](http://rt.cpan.org/NoAuth/Bugs.html?Dist=URI-pack)
 
-*   [AnnoCPAN, Annotated CPAN documentation](http://annocpan.org/dist/URI-pack)
-
 *   [CPAN Ratings](http://cpanratings.perl.org/d/URI-pack)
 
 *   [Search CPAN](http://search.cpan.org/dist/URI-pack)
@@ -33,7 +31,7 @@ You can also look for information at:
 COPYRIGHT AND LICENCE
 ---------------------
 
-Copyright 2009 Douglas Christopher Wilson.
+Copyright 2011 Douglas Christopher Wilson.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of either:

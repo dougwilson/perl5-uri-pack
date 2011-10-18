@@ -1,4 +1,4 @@
-#!perl -T
+#!/usr/bin/env perl
 
 use 5.008;
 use strict;
@@ -22,3 +22,4 @@ Test::Perl::Critic->import(
 # Criticize code
 all_critic_ok();
 
+exit 0;
